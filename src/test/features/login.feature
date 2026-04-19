@@ -1,5 +1,5 @@
 Feature: User Authentication tests
-
+    
 	Background:
     Given I am on the login page
 
