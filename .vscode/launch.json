@@ -1,0 +1,27 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Cucumber/Playwright",
+      "cwd": "${workspaceFolder}",
+      // 用 cucumber-js 作为入口，而不是直接跑 .ts 文件
+      "program": "${workspaceFolder}/node_modules/@cucumber/cucumber/bin/cucumber-js",
+      "args": [
+        // 指定要调试的 feature 文件
+        "src/test/features/login.feature",
+        // 告诉 cucumber 用 ts-node 加载 TypeScript
+        "--require-module",
+        "ts-node/register",
+        // 指定步骤文件路径
+        "--require",
+        "src/test/steps/**/*.ts"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true
+    }
+  ]
+}
