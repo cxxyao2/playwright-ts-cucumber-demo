@@ -1,18 +1,16 @@
-import { Given, Then, When } from "@cucumber/cucumber";
-import { chromium, Page, Browser } from '@playwright/test';
+import { Given, Then, When, setDefaultTimeout } from "@cucumber/cucumber";
+import { pageFixture } from "../../hooks/pageFixture";
+import { expect } from "playwright/test";
 
-let browser: Browser;
-let page: Page;
-
-
+setDefaultTimeout(60 * 1000 * 3);
 
 Given('I am on the login page', async function () {
-    browser = await chromium.launch({ headless: false });
-    page = await browser.newPage();
-    await page.goto('https://www.msn.com/en-ca', { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await pageFixture.page.goto('https://www.msn.com/en-ca', { waitUntil: 'domcontentloaded', timeout: 30000 });
+
 });
 
 When('User enter the username as {string}', async function (username: string) {
+    await expect(pageFixture.page.locator('input[type="search"]').first()).toBeVisible();
     console.log(`User enter the username as ${username}`);
 });
 
@@ -24,5 +22,4 @@ When('User enter the password as {string}', async function (password: string) {
 
 Then('Login should be successful', async function () {
     console.log('Login should be successful');
-    await browser.close();
 });
