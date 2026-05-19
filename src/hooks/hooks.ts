@@ -18,10 +18,10 @@ Before(async function () {
 
 });
 
-// AfterStep(async function ({ pickle, result }) {
-//     const img = await pageFixture.page.screenshot({ path: `./screenshots/${pickle.name}` + `-${new Date().getTime()}.png` });
-//     await this.attach(img, 'image/png');
-// });
+AfterStep(async function ({ pickle, result }) {
+    const img = await pageFixture.page.screenshot({ path: `./screenshots/${pickle.name}` + `-${new Date().getTime()}.png` });
+    await this.attach(img, 'image/png');
+});
 
 
 After(async function ({ pickle, result }) {

@@ -10,13 +10,18 @@ Given('I am on the login page', async function () {
 });
 
 When('User enter the username as {string}', async function (username: string) {
-    await expect(pageFixture.page.locator('input[type="search"]').first()).toBeVisible();
+    const usernameInput = pageFixture.page.getByRole('searchbox').first();
+    await expect(usernameInput).toBeVisible();
+    await usernameInput.fill(username);
     console.log(`User enter the username as ${username}`);
 });
 
 
 When('User enter the password as {string}', async function (password: string) {
-    console.log(`User enter the password as "password"`);
+    const passwordInput = pageFixture.page.getByLabel('Password').first();
+    await expect(passwordInput).toBeVisible();
+    await passwordInput.fill(password);
+    console.log(`User enter the password as ${password}`);
 });
 
 
